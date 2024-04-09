@@ -32,6 +32,13 @@ function validateField(){
     if(this.type=='email'){
         validateEmail(this)
     }
+
+    let error=document.querySelectorAll('.error')
+    if(email.value !== '' && subject.value !== '' &&  message.value !== ''){
+        if(error.length === 0){
+            sendBtn.disabled=false
+        }
+    }
 }
 
 //validate length of fields
