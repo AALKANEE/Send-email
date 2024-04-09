@@ -26,5 +26,16 @@ function appInit(){
 
 // validating field of form
 function validateField(){
-    console.log('yes')
+    console.log(this)
+
+    validateLength(this)
+}
+
+//validate length of fields
+function validateLength(field){
+    if(field.value.length > 0){
+        console.log('true')
+    }else{
+        console.log('false')
+    }
 }
