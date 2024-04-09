@@ -2,7 +2,9 @@
 const sendBtn= document.querySelector('#sendBtn'),
     email=document.querySelector('#email'),
     subject=document.querySelector('#subject'),
-    message=document.querySelector('#message')
+    message=document.querySelector('#message'),
+    resetBtn=document.querySelector('#resetBtn'),
+    form=document.querySelector('#email-form')
 
 
 //eventListeners
@@ -14,6 +16,9 @@ function eventListeners(){
     email.addEventListener('blur',validateField)
     subject.addEventListener('blur',validateField)
     message.addEventListener('blur',validateField)
+
+    //reset btn
+    resetBtn.addEventListener('click',resetForm)
 }
 
 
@@ -63,4 +68,9 @@ function validateEmail(field){
         field.style.borderBottomColor='red'
         field.classList.add('error')
     }
+}
+
+//reset form with button
+function resetForm(){
+    form.reset()
 }
