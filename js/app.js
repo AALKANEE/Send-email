@@ -26,16 +26,34 @@ function appInit(){
 
 // validating field of form
 function validateField(){
-    console.log(this)
-
     validateLength(this)
+
+    //validate email field
+    if(this.type=='email'){
+        validateEmail(this)
+    }
 }
 
 //validate length of fields
 function validateLength(field){
     if(field.value.length > 0){
-        console.log('true')
+        field.style.borderBottomColor='green'
+        field.classList.remove('error')
     }else{
-        console.log('false')
+        field.style.borderBottomColor='red'
+        field.classList.add('error')
+    }
+}
+
+//validate email fields contains @
+function validateEmail(field){
+    console.log(field.value)
+    const emailText=field.value
+    if(emailText.includes('@')){
+        field.style.borderBottomColor='green'
+        field.classList.remove('error')
+    }else{
+        field.style.borderBottomColor='red'
+        field.classList.add('error')
     }
 }
