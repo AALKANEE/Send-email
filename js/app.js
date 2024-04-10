@@ -1,76 +1,99 @@
 // variables
-const sendBtn= document.querySelector('#sendBtn'),
-    email=document.querySelector('#email'),
-    subject=document.querySelector('#subject'),
-    message=document.querySelector('#message'),
-    resetBtn=document.querySelector('#resetBtn'),
-    form=document.querySelector('#email-form')
+const sendBtn = document.querySelector('#sendBtn'),
+      email = document.querySelector('#email'),
+      subject = document.querySelector('#subject'),
+      message = document.querySelector('#message'),
+      resetBtn = document.querySelector('#resetBtn'),
+      form = document.querySelector('#email-form')
+
+    
 
 
-//eventListeners
+
+// eventListeners
 eventListeners()
 function eventListeners(){
     // app initialization
-    document.addEventListener('DOMContentLoaded',appInit)
+    document.addEventListener('DOMContentLoaded', appInit)
     // validating fields
-    email.addEventListener('blur',validateField)
-    subject.addEventListener('blur',validateField)
-    message.addEventListener('blur',validateField)
+    email.addEventListener('blur', validateField)
+    subject.addEventListener('blur', validateField)
+    message.addEventListener('blur', validateField)
 
-    //reset btn
-    resetBtn.addEventListener('click',resetForm)
+    // reset btn
+    resetBtn.addEventListener('click', resetForm)
+
+    // submit form and show gif
+    form.addEventListener('submit', submitForm)
 }
 
 
-//functions
 
+
+// functions
 function appInit(){
     // disabled send button on load
-    sendBtn.disabled=true
+    sendBtn.disabled = true
 }
 
-// validating field of form
+// sending email and submit the form
+function submitForm(e){
+    e.preventDefault()
+
+    // show the spinner
+    const spinner = document.getElementById('spinner')
+    spinner.style.display = 'block'
+    
+    // show the email send image
+    setTimeout(function() {
+        // hide first spinner 
+        spinner.style.display = 'none' 
+    }, 3000);
+}
+
+// validating fields of form
 function validateField(){
+    // validate length of fields
     validateLength(this)
 
-    //validate email field
-    if(this.type=='email'){
+    // validate email field
+    if(this.type === 'email'){
         validateEmail(this)
     }
 
-    let error=document.querySelectorAll('.error')
-    if(email.value !== '' && subject.value !== '' &&  message.value !== ''){
-        if(error.length === 0){
-            sendBtn.disabled=false
-        }
+    let error = document.querySelectorAll('.error')
+    if (email.value !== '' && subject.value !== '' && message.value !== '') {
+        if (error.length === 0) {
+            sendBtn.disabled = false
+        } 
     }
 }
 
-//validate length of fields
+// validate length of fields
 function validateLength(field){
     if(field.value.length > 0){
-        field.style.borderBottomColor='green'
+        field.style.borderBottomColor = 'green'
         field.classList.remove('error')
-    }else{
-        field.style.borderBottomColor='red'
+    } else {
+        field.style.borderBottomColor = 'red'
         field.classList.add('error')
     }
 }
 
-//validate email fields contains @
+// validate email field contains @
 function validateEmail(field){
-    console.log(field.value)
-    const emailText=field.value
+    
+    const emailText = field.value
     if(emailText.includes('@')){
-        field.style.borderBottomColor='green'
+        field.style.borderBottomColor = 'green'
         field.classList.remove('error')
-    }else{
-        field.style.borderBottomColor='red'
+    } else {
+        field.style.borderBottomColor = 'red'
         field.classList.add('error')
     }
 }
 
-//reset form with button
+// reset form with button
 function resetForm(){
     form.reset()
 }
