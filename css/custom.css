@@ -1,7 +1,19 @@
 body {
     background: #43cea2;
     background: -webkit-linear-gradient(to right, #185a9d, #43cea2);
-    background: linear-gradient(to right, #185a9d, #43cea2); 
+    background: linear-gradient(to right, #0daa15, #ebd40b); 
+}
+footer{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: orange;
+    padding: 10px 0;
 }
 #content {
     background-color: white;
