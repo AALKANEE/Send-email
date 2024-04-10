@@ -1,18 +1,18 @@
 // variables
 const sendBtn = document.querySelector('#sendBtn'),
-      email = document.querySelector('#email'),
-      subject = document.querySelector('#subject'),
-      message = document.querySelector('#message'),
-      resetBtn = document.querySelector('#resetBtn'),
-      form = document.querySelector('#email-form')
+    email = document.querySelector('#email'),
+    subject = document.querySelector('#subject'),
+    message = document.querySelector('#message'),
+    resetBtn = document.querySelector('#resetBtn'),
+    form = document.querySelector('#email-form')
 
-    
+
 
 
 
 // eventListeners
 eventListeners()
-function eventListeners(){
+function eventListeners() {
     // app initialization
     document.addEventListener('DOMContentLoaded', appInit)
     // validating fields
@@ -31,33 +31,48 @@ function eventListeners(){
 
 
 // functions
-function appInit(){
+function appInit() {
     // disabled send button on load
     sendBtn.disabled = true
 }
 
 // sending email and submit the form
-function submitForm(e){
+function submitForm(e) {
     e.preventDefault()
 
     // show the spinner
     const spinner = document.getElementById('spinner')
     spinner.style.display = 'block'
-    
+
+    //make scond gif
+    const sendEmailImg = document.createElement('img')
+    sendEmailImg.src = '../img/mail.gif'
+    sendEmailImg.style.display = 'block'
+
     // show the email send image
-    setTimeout(function() {
+    setTimeout(function () {
         // hide first spinner 
-        spinner.style.display = 'none' 
+        spinner.style.display = 'none'
+
+        // append image to the HTML
+        const loaders = document.querySelector('#loaders')
+        loaders.appendChild(sendEmailImg)
+
+        // reset and remove
+        setTimeout(() => {
+            resetForm()
+            sendEmailImg.remove()
+        }, 5000)
     }, 3000);
 }
 
 // validating fields of form
-function validateField(){
+function validateField() {
     // validate length of fields
     validateLength(this)
 
     // validate email field
-    if(this.type === 'email'){
+    if (this.type === 'email') {
         validateEmail(this)
     }
 
@@ -65,13 +80,13 @@ function validateField(){
     if (email.value !== '' && subject.value !== '' && message.value !== '') {
         if (error.length === 0) {
             sendBtn.disabled = false
-        } 
+        }
     }
 }
 
 // validate length of fields
-function validateLength(field){
-    if(field.value.length > 0){
+function validateLength(field) {
+    if (field.value.length > 0) {
         field.style.borderBottomColor = 'green'
         field.classList.remove('error')
     } else {
@@ -81,10 +96,10 @@ function validateLength(field){
 }
 
 // validate email field contains @
-function validateEmail(field){
-    
+function validateEmail(field) {
+
     const emailText = field.value
-    if(emailText.includes('@')){
+    if (emailText.includes('@')) {
         field.style.borderBottomColor = 'green'
         field.classList.remove('error')
     } else {
@@ -94,6 +109,6 @@ function validateEmail(field){
 }
 
 // reset form with button
-function resetForm(){
+function resetForm() {
     form.reset()
 }
